@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Mocha Tests",
-            "cwd": "${workspaceRoot}",
+            "cwd": "",
             "runtimeExecutable": "mocha",
             "windows": {
                 "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/mocha.cmd"
