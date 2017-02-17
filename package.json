@@ -1,0 +1,13 @@
+{
+  "name": "sales-taxes-problem-kata",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "url",
+    "url": "https://github.com/akoterle/sales-taxes-problem.git"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "sinon": "^1.17.7"
+  }
+}
