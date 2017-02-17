@@ -1,25 +1,33 @@
-function Taxes() {
-    this._basic_tax_percentage = 10;
-    this._import_duty_percentage = 5;
+function TaxCalculator() {
+    this._basic_tax_rate = 10;
+    this._import_duty_rate = 5;
+    this._round_factor = 0.05;
 }
 
-function isExempt(product) {
+let isExempt = function (product) {
     return product.name === 'book';
 }
 
-function isValid(product) {
+let isValid = function (product) {
     return (product && Object.keys(product).length > 0);
 }
 
-Taxes.prototype.calculate = function(product) {
-    if ( !isValid(product) || isExempt(product) ) {
-	    return 0;
+let calcTax = function (price, rate, round_factor) {
+    let tax = (price * rate) / 100;
+    return Math.round(tax / round_factor) * round_factor;
+}
+
+TaxCalculator.prototype.calculate = function (product) {
+    if (!isValid(product) || isExempt(product)) {
+        return 0;
     }
+    var taxes = 0;
     if (product.name.startsWith('imported'))
-        return (product.price/100) * this._import_duty_percentage;
-    return (product.price/100) * this._basic_tax_percentage;
+        taxes += calcTax(product.price, this._import_duty_rate, this._round_factor);
+    taxes += calcTax(product.price, this._basic_tax_rate, this._round_factor);
+    return taxes;
 };
 
-module.exports = function TaxCalculator() {
-  return new Taxes()
+module.exports = function Taxes() {
+    return new TaxCalculator()
 }
