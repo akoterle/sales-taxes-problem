@@ -7,7 +7,7 @@ function SalesTaxesService() {
 
 var isExempt = function (product) {
     return (product.name.indexOf('book') != -1)
-    || (product.name.indexOf("box of chocolates") != -1);
+        || (product.name.indexOf("box of chocolates") != -1);
 }
 
 var isImported = function (product) {
@@ -15,14 +15,14 @@ var isImported = function (product) {
 }
 
 SalesTaxesService.prototype.apply = function (item) {
-    var taxAmount = 0;
+    var taxRate = 0;
     if (!isExempt(item)) {
-        taxAmount += this.taxCalculator.calculateTax(item.price, 10);
+        taxRate += 10;
     }
     if (isImported(item)) {
-        taxAmount += this.taxCalculator.calculateTax(item.price, 5);
+        taxRate += 5;
     }
-    return taxAmount;
+    return this.taxCalculator.calculateTax(item.price, taxRate);
 }
 
 
