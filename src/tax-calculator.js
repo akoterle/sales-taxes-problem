@@ -1,6 +1,4 @@
-function TaxCalculator() {
-    this._basic_tax_rate = 10;
-    this._import_duty_rate = 5;
+function TaxCalculatorService() {
     this._round_factor = 0.05;
 }
 
@@ -12,12 +10,12 @@ let isValid = function (product) {
     return (product && Object.keys(product).length > 0);
 }
 
-let calcTax = function (price, rate, round_factor) {
-    let tax = (price * rate) / 100;
-    return Math.round(tax / round_factor) * round_factor;
+TaxCalculatorService.prototype.calculateTax = function (price, rate) {
+    var tax = (price * rate) / 100;
+    return Math.round(tax / this._round_factor) * this._round_factor;
 }
 
-TaxCalculator.prototype.calculate = function (product) {
+TaxCalculatorService.prototype.calculate = function (product) {
     if (!isValid(product) || isExempt(product)) {
         return 0;
     }
@@ -28,6 +26,6 @@ TaxCalculator.prototype.calculate = function (product) {
     return taxes;
 };
 
-module.exports = function Taxes() {
-    return new TaxCalculator()
+module.exports = function TaxCalculator() {
+    return new TaxCalculatorService()
 }
