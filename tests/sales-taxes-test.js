@@ -24,12 +24,6 @@ describe('SaleTaxes', function () {
         expect(salesTaxes.apply(item)).to.equal(0.5);
     });
 
-    it("Import duty is an additional sales tax applicable on all imported goods at a rate of 5%", function() {
-        const salesTaxes = SaleTaxes();
-        const item = { quantity: 1, name: "imported box of chocolates", price: 10 };
-        expect(salesTaxes.apply(item)).to.equal(0.5);
-    });
-
     it("Taxes and duties are both applied for non exempt imported products", function() {
         const salesTaxes = SaleTaxes();
         const item = { quantity: 1, name: "imported  bottle of perfume", price: 27.99 };
