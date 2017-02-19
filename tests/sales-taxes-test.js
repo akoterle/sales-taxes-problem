@@ -26,7 +26,7 @@ describe('SaleTaxes', function () {
 
     it("Taxes and duties are both applied for non exempt imported products", function() {
         const salesTaxes = SaleTaxes();
-        const item = { quantity: 1, name: "imported  bottle of perfume", price: 27.99 };
+        const item = { quantity: 1, name: "imported bottle of perfume", price: 27.99 };
         expect(salesTaxes.apply(item)).to.equal(4.2);
     });
 
